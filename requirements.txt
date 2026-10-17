@@ -1,5 +1,8 @@
 requests
 Pillow
+numpy
 edge-tts
 gTTS
 cloudinary
+rembg
+onnxruntime
