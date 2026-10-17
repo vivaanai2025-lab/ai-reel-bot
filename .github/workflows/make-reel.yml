@@ -8,13 +8,19 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+
+      - name: Remember the background-remover model (saves time next run)
+        uses: actions/cache@v4
+        with:
+          path: ~/.u2net
+          key: rembg-u2net-v1
 
       - name: Install tools
         run: |
@@ -25,16 +31,21 @@ jobs:
       - name: Build reel
         env:
           PAYLOAD: ${{ toJson(github.event.client_payload) }}
-          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
           CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
           CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
           MAKE_WEBHOOK_URL: ${{ secrets.MAKE_WEBHOOK_URL }}
         run: python make_reel.py
 
-      - name: Save video so you can download and watch it
+      - name: Save video (and cut-out previews) so you can download and check them
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: reel
-          path: reel.mp4
+          path: |
+            reel.mp4
+            preview/
+          if-no-files-found: ignore
