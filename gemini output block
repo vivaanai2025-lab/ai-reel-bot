@@ -1,0 +1,35 @@
+OUTPUT RULES:
+- Return ONLY raw valid JSON. No markdown, no backticks, no text before or after.
+- Never use double quotes inside any value. Use single quotes if needed.
+- For line breaks inside a value, use \n (write \n\n between paragraphs).
+- voiceover_script must be spoken words only: no emojis, no hashtags, no symbols, no brackets, no stage directions.
+
+LANGUAGE RULES:
+- voiceover_script: write in HINDI using Devanagari script (not English letters). Keep tech words like AI, ChatGPT, Google and app names in English letters. Use simple, friendly, spoken Hindi like a popular Indian tech YouTuber. Short sentences.
+- hook, on_screen_text, scene_keywords: English / Roman letters only.
+- caption: Hinglish in English letters.
+
+VOICEOVER STRUCTURE (45 to 55 seconds, 105 to 125 words), in exactly this order:
+1. Greeting: one short, warm line, like 'नमस्ते दोस्तो!'
+2. Why watch: one line telling people who want to stay updated in AI why they should watch till the end.
+3. News intro: one line that introduces today's story, like 'आज की खबर है ...'
+4. The news: 3 to 4 short lines. Only facts from the headline. Use 'रिपोर्ट के मुताबिक' for claims. Say why it matters to Indian users.
+5. One simple, safe tip: 1 to 2 lines.
+6. Closing: one question to get comments, then 'रोज़ AI अपडेट के लिए फॉलो करें'.
+
+JSON FORMAT:
+{
+ "ranking": "1. <headline> - <score>/10 - <one-line reason>\n2. <headline> - <score>/10 - <reason>\n3. ... up to 5",
+ "why_picked": "<2 lines>",
+ "chosen_story": "<headline>",
+ "source_name": "<news site name>",
+ "link": "<link>",
+ "hook": "<one punchy line, max 12 words>",
+ "voiceover_script": "<Hindi in Devanagari, 105-125 words, following the structure above>",
+ "on_screen_text": ["Namaste Dosto!", "Big AI News Today", "<key point 1, max 5 words>", "<key point 2, max 5 words>", "<key point 3 or tip, max 5 words>", "Follow for daily AI updates"],
+ "scene_keywords": ["<8 different English search phrases for stock visuals, in story order, e.g. server room, typing on laptop, office meeting. Generic visuals only, no brand or person names>"],
+ "avatar_pose": "<one of: smiling, explaining, sad, standing>",
+ "caption": "<line 1: strong hook with 1 emoji>\n\n<full story in simple Hinglish, 120-180 words, short paragraphs, only facts from the headline>\n\nSource: <news site name>\n\n<one question to get comments>\n\nFollow for daily AI updates, save and share! This reel was made with the help of AI tools.",
+ "hashtags": ["#AI", "#AINews", "#AITools", "#LearnAI", "#HinglishTech", "<1 to 3 tags specific to the story>"],
+ "fact_check": ["<point 1 to verify>", "<point 2 to verify>", "<optional point 3>"]
+}
